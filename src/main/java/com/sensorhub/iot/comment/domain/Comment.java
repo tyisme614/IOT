@@ -1,5 +1,6 @@
 package com.sensorhub.iot.comment.domain;
 
+import antlr.CommonToken;
 import com.sensorhub.iot.article.domain.Article;
 import com.sensorhub.iot.rely.domain.ReplyInfo;
 import com.sensorhub.iot.user.domain.UserInfo;
@@ -25,7 +26,6 @@ public class Comment implements Serializable
     private String content;//评论内容
 
     private String storeLocation;//存放图片的物理路径
-
     /*
     0:正常
     1:已删除
@@ -41,6 +41,31 @@ public class Comment implements Serializable
     private Set<ReplyInfo> replyInfos = new HashSet<ReplyInfo>(0);
 
     private double fileSize=0;
+
+    private Comment parent;
+
+    private Set<Comment> comments = new HashSet<Comment>(0);
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PARENT_ID")
+    public Comment getParent()
+    {
+        return parent;
+    }
+    public void setParent(Comment parent)
+    {
+        this.parent = parent;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
+    public Set<Comment> getComments()
+    {
+        return comments;
+    }
+    public void setComments(Set<Comment> comments)
+    {
+        this.comments = comments;
+    }
 
     @Column(name="FILESIZE")
     public double getFileSize()

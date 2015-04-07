@@ -41,7 +41,7 @@ public class ArticleManager extends HibernateEntityDao<Article>
         this.userInfoManager = userInfoManager;
     }
 
-    public boolean saveArticle(String title,String body,MultipartFile image,long userId)
+    public boolean saveArticle(String title,String body,MultipartFile file,long userId)
     {
         try
         {
@@ -54,21 +54,23 @@ public class ArticleManager extends HibernateEntityDao<Article>
             article.setBody(body);
             article.setTitle(title);
 
-            if (image != null&& StringUtils.isNotBlank(image.getOriginalFilename()))
+            if (file != null&& StringUtils.isNotBlank(file.getOriginalFilename()))
             {
                 StoreDTO storeDto = storeConnector.save("article_image",
-                        new MultipartFileResource(image),
-                        image.getOriginalFilename());
-                BigDecimal bg = new BigDecimal(image.getSize()/1024d/1024d);
+                        new MultipartFileResource(file),
+                        file.getOriginalFilename());
+                BigDecimal bg = new BigDecimal(file.getSize()/1024d/1024d);
                 article.setFileSize(bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
                 article.setStoreLocation(storeDto.getKey());
             }
+            save(article);
+            return true;
         }
         catch (Exception e)
         {
+            logger.info(e.getMessage());
+            return false;
         }
-
-
     }
 
 
