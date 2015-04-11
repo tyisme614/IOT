@@ -37,7 +37,7 @@ public class CommentWrapper extends Comment
         map.put("storeLocation", comment.getStoreLocation());
         map.put("commentDate", comment.getCommentDate());
         map.put("commentUserName", comment.getUserInfo().getNickName());
-
+        map.put("parentID", comment.getParent().getId());
     }
 
 }

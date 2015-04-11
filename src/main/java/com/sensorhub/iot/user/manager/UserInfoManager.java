@@ -34,17 +34,11 @@ public class UserInfoManager extends HibernateEntityDao<UserInfo>
     public UserInfo login(String userName, String password)
     {
         logger.info("enter check user name");
-        String hql = "from UserInfo where userName=? and password=? and status=?";
-        Object[]  params = new Object[]{userName, password,0};
-        UserInfo userInfo = findUniqueBy(hql, params);
+
+        String hql = "from UserInfo where username=? and pasword=? and status=?";
+        UserInfo userInfo = findUnique(hql, userName, password, 0);
         return userInfo;
     }
 
-    public UserInfo findById(Long id){
-        return  get(id);
-    }
 
-    public Criteria getCriteria(){
-        return  getSession().createCriteria(UserInfo.class);
-    }
 }

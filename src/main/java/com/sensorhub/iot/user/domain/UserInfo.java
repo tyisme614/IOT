@@ -1,15 +1,9 @@
 package com.sensorhub.iot.user.domain;
 
-import com.sensorhub.iot.PipeRelateResource.domain.PipeRelateResourceInfo;
-import com.sensorhub.iot.PipeRelateResource.domain.PipeRelateResourceRecord;
 import com.sensorhub.iot.article.domain.Article;
 import com.sensorhub.iot.comment.domain.Comment;
 import com.sensorhub.iot.device.domain.DeviceInfo;
-import com.sensorhub.iot.rely.domain.ReplyInfo;
-import com.sensorhub.iot.service.domain.ServiceInfo;
-import com.sensorhub.iot.service.domain.ServiceRegisterRecord;
 
-import javax.lang.model.element.Name;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -20,16 +14,16 @@ import java.util.Set;
  * Created by admin on 2015/1/15.
  */
 @Entity
-@Table(name = "USER_ACCOUNT")
+@Table(name = "IOT_USER_ACCOUNT")
 @SequenceGenerator(name = "SEQ_USER_ACCOUNT_ID", sequenceName = "SEQ_USER_ACCOUNT_ID", allocationSize = 1, initialValue = 1)
 public class UserInfo implements Serializable
 {
 
     private Long id;
 
-    private String userName;
+    private String username;
 
-    private String password;
+    private String pasword;
 
     private String nickName;
 
@@ -45,7 +39,15 @@ public class UserInfo implements Serializable
 
     private Set<Article> articles = new HashSet<Article>(0);
 
-    private Set<ReplyInfo> replyInfos = new HashSet<ReplyInfo>(0);
+    @Column(name="PASWORD")
+    public String getPasword()
+    {
+        return pasword;
+    }
+    public void setPasword(String pasword)
+    {
+        this.pasword = pasword;
+    }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userInfo")
     public Set<Comment> getComments()
@@ -65,16 +67,6 @@ public class UserInfo implements Serializable
     public void setArticles(Set<Article> articles)
     {
         this.articles = articles;
-    }
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userInfo")
-    public Set<ReplyInfo> getReplyInfos()
-    {
-        return replyInfos;
-    }
-    public void setReplyInfos(Set<ReplyInfo> replyInfos)
-    {
-        this.replyInfos = replyInfos;
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userInfo")
@@ -99,24 +91,15 @@ public class UserInfo implements Serializable
     }
 
     @Column(name = "USERNAME")
-    public String getUserName()
+    public String getUsername()
     {
-        return userName;
+        return username;
     }
-    public void setUserName(String userName)
+    public void setUsername(String username)
     {
-        this.userName = userName;
+        this.username = username;
     }
 
-    @Column(name = "PASSWORD")
-    public String getPassword()
-    {
-        return password;
-    }
-    public void setPassword(String password)
-    {
-        this.password = password;
-    }
 
     @Column(name="NICKNAME")
     public String getNickName()
@@ -148,7 +131,6 @@ public class UserInfo implements Serializable
     {
         return status;
     }
-
     public void setStatus(int status)
     {
         this.status = status;

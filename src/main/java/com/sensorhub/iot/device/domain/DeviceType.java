@@ -9,7 +9,7 @@ import java.util.Set;
  * Created by admin on 2015/4/6.
  */
 @Entity
-@Table(name = "DEVICE_TYPE")
+@Table(name = "IOT_DEVICE_TYPE")
 @SequenceGenerator(name = "SEQ_DEVICE_TYPE_ID", sequenceName = "SEQ_DEVICE_TYPE_ID", allocationSize = 1, initialValue = 1)
 public class DeviceType implements Serializable
 {

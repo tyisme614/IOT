@@ -1,7 +1,8 @@
-package com.sensorhub.iot.user.rs;
+package com.sensorhub.iot.device.rs;
 
-import com.sensorhub.iot.core.util.BaseDTO;
-import com.sensorhub.iot.core.util.StringUtils;
+import com.sensorhub.iot.device.domain.DeviceInfo;
+import com.sensorhub.iot.device.manager.DeviceManager;
+import com.sensorhub.iot.device.support.DeviceSensorWrapper;
 import com.sensorhub.iot.user.domain.UserInfo;
 import com.sensorhub.iot.user.manager.UserInfoManager;
 import com.sensorhub.iot.user.support.UserAccountWrapper;
@@ -14,49 +15,55 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by admin on 2015/1/15.
  */
 @Component
-@Path("user")
-public class UserAccountResource
+@Path("device")
+public class DeviceResource
 {
-    private static Logger logger = LoggerFactory.getLogger(UserAccountResource.class);
+    private static Logger logger = LoggerFactory.getLogger(DeviceResource.class);
+
+    private DeviceManager deviceManager;
     private UserInfoManager userInfoManager;
 
+    @Resource
+    public void setDeviceManager(DeviceManager deviceManager)
+    {
+        this.deviceManager = deviceManager;
+    }
+
     @GET
-    @Path("login")
+    @Path("registerWithOutUserName")
     @Produces(MediaType.APPLICATION_JSON)
-    public Map exists(@QueryParam("userName") String userName,
-                          @QueryParam("password") String password) {
-        Map map = new HashMap<String, Object>();
-        try
-        {
-            UserInfo userInfo = userInfoManager.login(userName,password);
-            if (userInfo == null)
-            {
-                map.put("success", false);
-                map.put("message","登录用户名或密码错误");
-                return  map;
-            }
-            map.put("success", true);
-            map.put("message", new UserAccountWrapper(userInfo).toMap());
-        }
-        catch (Exception e)
+    public Map register0(@QueryParam("dev_uuid") String dev_uuid,
+                          @QueryParam("typeCode") String typeCode,
+                          @QueryParam("sensors")List<String> sensors)
+    {
+        Map map = new HashMap();
+
+        DeviceInfo deviceInfo = deviceManager.registerDeviceWithoutUserName(dev_uuid,
+                typeCode, sensors);
+        if (deviceInfo == null)
         {
             map.put("success", false);
-            map.put("message", e.getMessage());
+            map.put("message","设备注册失败");
+            return  map;
         }
-        return  map;
+        DeviceSensorWrapper deviceSensorWrapper = new DeviceSensorWrapper(deviceInfo);
+        map.put("success", true);
+        map.put("message", deviceSensorWrapper);
+        return map;
 
     }
 
     @POST
-    @Path("register")
+    @Path("regiserWithUserName")
     @Produces(MediaType.APPLICATION_JSON)
-    public Map register(@QueryParam("userName") String userName,
+    public Map register1(@QueryParam("userName") String userName,
                             @QueryParam("password") String password,
                             @QueryParam("nickName") String nickName) {
         Map map = new HashMap<String, Object>();

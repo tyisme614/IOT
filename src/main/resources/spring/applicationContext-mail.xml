@@ -9,7 +9,7 @@
 
 	<bean id="mailHelper" class="com.sensorhub.iot.core.ext.mail.MailHelper">
 		<property name="defaultMailServerInfo">
-			<bean class="com.casic.xxfw.core.ext.mail.MailServerInfo">
+			<bean class="com.sensorhub.iot.core.ext.mail.MailServerInfo">
 				<property name="host" value="${mail.host}" />
 				<property name="username" value="${mail.username}" />
 				<property name="password" value="${mail.password}" />

@@ -14,7 +14,7 @@ import java.util.Set;
  * Created by admin on 2015/4/6.
  */
 @Entity
-@Table(name = "SENSOR_INFO")
+@Table(name = "IOT_SENSOR_INFO")
 @SequenceGenerator(name = "SEQ_SENSOR_INFO_ID", sequenceName = "SEQ_SENSOR_INFO_ID", allocationSize = 1, initialValue = 1)
 public class SensorInfo implements Serializable
 {
@@ -64,7 +64,7 @@ public class SensorInfo implements Serializable
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SENSOR_ID")
+    @JoinColumn(name = "SENSOR_TYPE_ID")
     public SensorType getSensorType()
     {
         return sensorType;

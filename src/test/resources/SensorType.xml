@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <!--传感器类型表-->
+    <IOT_SENSOR_TYPE DBID="1" MEMO="甲醛传感器" SENSOR_TYPE_NAME="甲醛传感器" TYPECODE="sensor_hchc" STATUS="0" />
+    <IOT_SENSOR_TYPE DBID="2" MEMO="温度传感器" SENSOR_TYPE_NAME="温度传感器" TYPECODE="sensor_temp" STATUS="0" />
+    <IOT_SENSOR_TYPE DBID="3" MEMO="湿度传感器" SENSOR_TYPE_NAME="湿度传感器" TYPECODE="sensor_humidity" STATUS="0" />
+
+</dataset>

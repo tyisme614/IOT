@@ -2,11 +2,11 @@
 	<contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator"/>
 
 
-   <define name="LOCAL_PROP_EXISTS" class="com.casic.xxfw.core.logback.ResourceExistsPropertyDefiner">
+   <define name="LOCAL_PROP_EXISTS" class="com.sensorhub.iot.core.logback.ResourceExistsPropertyDefiner">
       <path>application.local.properties</path>
    </define>
 
-   <define name="SERVER_PROP_EXISTS" class="com.casic.xxfw.core.logback.ResourceExistsPropertyDefiner">
+   <define name="SERVER_PROP_EXISTS" class="com.sensorhub.iot.core.logback.ResourceExistsPropertyDefiner">
       <path>application.server.properties</path>
    </define>
 
@@ -71,7 +71,7 @@
     <logger name="org.hibernate.cache" level="debug"/>
 -->
 
-	<logger name="com.casic" level="info"/>
+	<logger name="com.sensorhub" level="info"/>
 	<logger name="com.sun.jersey.core.spi.component.ProviderServices" level="warn"/>
 	<logger name="com.sun.jersey.server.impl.cdi.CDIComponentProviderFactoryInitializer" level="warn"/>
 	<logger name="com.sun.jersey.server.impl.ejb.EJBComponentProviderFactoryInitilizer" level="warn"/>

@@ -11,7 +11,7 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = "ALARM_INFO")
+@Table(name = "IOT_ALARM_INFO")
 @SequenceGenerator(name = "SEQ_ALARM_INFO_ID", sequenceName = "SEQ_ALARM_INFO_ID", allocationSize = 1, initialValue = 1)
 public class AlarmInfo implements Serializable
 {

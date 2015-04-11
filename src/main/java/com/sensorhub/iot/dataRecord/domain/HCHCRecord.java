@@ -10,7 +10,7 @@ import java.util.Date;
  * Created by admin on 2015/4/6.
  */
 @Entity
-@Table(name = "HCHC_RECORD")
+@Table(name = "IOT_HCHC_RECORD")
 @SequenceGenerator(name = "SEQ_HCHC_RECORD_ID", sequenceName = "SEQ_HCHC_RECORD_ID", allocationSize = 1, initialValue = 1)
 public class HCHCRecord implements Serializable
 {

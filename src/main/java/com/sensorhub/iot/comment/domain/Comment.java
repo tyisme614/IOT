@@ -1,12 +1,9 @@
 package com.sensorhub.iot.comment.domain;
 
-import antlr.CommonToken;
 import com.sensorhub.iot.article.domain.Article;
-import com.sensorhub.iot.rely.domain.ReplyInfo;
 import com.sensorhub.iot.user.domain.UserInfo;
 
 import javax.persistence.*;
-import javax.print.DocFlavor;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -17,7 +14,7 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "COMMENT")
+@Table(name = "IOT_COMMENT")
 @SequenceGenerator(name = "SEQ_COMMENT_INFO_ID", sequenceName = "SEQ_COMMENT_INFO_ID", allocationSize = 1, initialValue = 1)
 public class Comment implements Serializable
 {
@@ -37,8 +34,6 @@ public class Comment implements Serializable
     private UserInfo userInfo;
 
     private Article article;
-
-    private Set<ReplyInfo> replyInfos = new HashSet<ReplyInfo>(0);
 
     private double fileSize=0;
 
@@ -75,16 +70,6 @@ public class Comment implements Serializable
     public void setFileSize(double fileSize)
     {
         this.fileSize = fileSize;
-    }
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "comment")
-    public Set<ReplyInfo> getReplyInfos()
-    {
-        return replyInfos;
-    }
-    public void setReplyInfos(Set<ReplyInfo> replyInfos)
-    {
-        this.replyInfos = replyInfos;
     }
 
     @Id

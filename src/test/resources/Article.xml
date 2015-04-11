@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <!--帖子表-->
+    <IOT_ARTICLE DBID="1" BODY="你好" HTIS="100" PUBDATE="2015-04-08" STATUS="0" TITLE="holy shit title" USER_ID="1"/>
+</dataset>

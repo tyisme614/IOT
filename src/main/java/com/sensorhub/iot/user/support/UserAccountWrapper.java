@@ -32,8 +32,8 @@ public class UserAccountWrapper extends UserInfo
 
     public void copyUserBase(Map<String, Object> map, UserInfo userAccount)
     {
-        map.put("username", userAccount.getUserName());
-        map.put("password", userAccount.getPassword());
+        map.put("username", userAccount.getUsername());
+        map.put("password", userAccount.getPasword());
         map.put("nickName", userAccount.getNickName());
         map.put("id", userAccount.getId());
         map.put("credits", userAccount.getCredits());

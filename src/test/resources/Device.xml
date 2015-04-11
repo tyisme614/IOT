@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <!--设备表-->
+    <IOT_DEVICE_INFO DBID="1" DEVICE_NAME="甲醛传感器01" SYNCDATE="2015-04-08" STATUS="0" DEVICE_UUID="123456" USER_ID="1" DEVICE_TYPE_ID="1"/>
+    <IOT_DEVICE_INFO DBID="2" DEVICE_NAME="温湿度监测仪01" SYNCDATE="2015-04-08" STATUS="0" DEVICE_UUID="234567" USER_ID="1" DEVICE_TYPE_ID="2"/>
+
+</dataset>

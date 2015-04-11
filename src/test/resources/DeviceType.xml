@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <!--设备类型表-->
+    <IOT_DEVICE_TYPE DBID="1" MEMO="甲醛监测仪" DEVIC_TYPE_NAME="甲醛监测仪" STATUS="0" TYPE_CODE="HCHC" />
+    <IOT_DEVICE_TYPE DBID="2" MEMO="温湿度监测仪" DEVIC_TYPE_NAME="温湿度监测仪"  STATUS="0" TYPE_CODE="Temp_Humidity"/>
+</dataset>

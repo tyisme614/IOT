@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<dataset>
-    <!--service info表-->
-    <XXFW_SERVICE_INFO DBID="1" SERVICENAME="测试服务信息1" SERVICE_DESC="测试服务信息1" USER_ID="1" REGISTERDATE="2015-02-28" SERVICETYPE="0" URL="www.baidu.com" STATUS="1"/>
-    <XXFW_SERVICE_INFO DBID="2" SERVICENAME="测试服务信息2" SERVICE_DESC="测试服务信息2" USER_ID="2" REGISTERDATE="2015-02-08" SERVICETYPE="0" URL="www.sohu.com" STATUS="1"/>
-    <XXFW_SERVICE_INFO DBID="3" SERVICENAME="测试服务信息3" SERVICE_DESC="测试服务信息3" USER_ID="3" REGISTERDATE="2015-02-28" SERVICETYPE="1" URL="www.sina.com" STATUS="1"/>
-</dataset>

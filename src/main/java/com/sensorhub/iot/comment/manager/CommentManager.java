@@ -53,7 +53,7 @@ public class CommentManager extends HibernateEntityDao<Comment>
         this.storeConnector = storeConnector;
     }
 
-    public boolean addComment(long articleId,String message,long userId,MultipartFile file)
+    public boolean addComment(long articleId,String message,long userId,MultipartFile file,long cID)
     {
         boolean result = false;
         try
@@ -72,6 +72,7 @@ public class CommentManager extends HibernateEntityDao<Comment>
 
             if (file != null&& StringUtils.isNotBlank(file.getOriginalFilename()))
             {
+                logger.info("===============上传文件为空====================");
                 StoreDTO storeDto = storeConnector.save("comment_image",
                         new MultipartFileResource(file),
                         file.getOriginalFilename());
@@ -79,6 +80,14 @@ public class CommentManager extends HibernateEntityDao<Comment>
                 comment.setFileSize(bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
                 comment.setStoreLocation(storeDto.getKey());
             }
+
+            if (cID != 0)
+            {
+                Comment parent = get(cID);
+                comment.setParent(parent);
+            }
+            save(comment);
+
             result = true;
         }
         catch (Exception e)
@@ -90,11 +99,10 @@ public class CommentManager extends HibernateEntityDao<Comment>
 
     public List queryComment(Article article, int page, int rows)
     {
-        String hql = "from Comment where artcile=? and status=? order by commentDate desc";
+        String hql = "from Comment where article=? and status=? order by commentDate desc";
         Object[] params = new Object[]{article, 0};
         Page pageResult = pagedQuery(hql, page, rows, params);
         List<Comment> comments = (List<Comment>) pageResult.getResult();
-
         return comments;
     }
 

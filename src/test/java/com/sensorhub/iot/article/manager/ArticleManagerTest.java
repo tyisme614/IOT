@@ -1,9 +1,11 @@
-package com.sensorhub.iot.user.manager;
+package com.sensorhub.iot.article.manager;
 
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.sensorhub.iot.article.domain.Article;
 import com.sensorhub.iot.user.domain.UserInfo;
+import com.sensorhub.iot.user.manager.UserInfoManager;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,16 +16,19 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import static junit.framework.Assert.assertEquals;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath*:spring/applicationContext*.xml")
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
         DirtiesContextTestExecutionListener.class,
         TransactionDbUnitTestExecutionListener.class })
-public class UserInfoManagerTest
+public class ArticleManagerTest
 {
+
+    private ArticleManager articleManager;
+
     private UserInfoManager userInfoManager;
 
     @Resource
@@ -32,34 +37,26 @@ public class UserInfoManagerTest
         this.userInfoManager = userInfoManager;
     }
 
-    @Test
-    @DatabaseSetup(value = "classpath:DB.xml", type = DatabaseOperation.CLEAN_INSERT)
-    public void testCheckUserName() throws Exception
+    @Resource
+    public void setArticleManager(ArticleManager articleManager)
     {
-       boolean result =  userInfoManager.checkUserName("zhangfan");
-        assertEquals(false, result);
-
-    }
-    @Test
-    public void testLogin() throws Exception
-    {
-        UserInfo result = userInfoManager.login("zhangfan", "123456");
-        assertEquals("zhangfan", result.getUsername());
-
+        this.articleManager = articleManager;
     }
 
+
     @Test
-    @DatabaseSetup(value = "classpath:DB.xml", type = DatabaseOperation.DELETE)
-    public void testAddUserAccount() throws Exception
+    public void testSaveArticle() throws Exception
     {
         UserInfo userInfo = new UserInfo();
-        userInfo.setNickName("predator2");
-        userInfo.setRegisterDate(new Date());
-        userInfo.setUsername("zhangfan2");
-        userInfoManager.addUserAccount(userInfo);
+        userInfo.setNickName("zhangfan");
+        userInfoManager.save(userInfo);
+        UserInfo userInfo1 = userInfoManager.findUniqueBy("nickName", "zhangfan");
 
-        UserInfo userInfo1 = userInfoManager.findUniqueBy("nickName", "predator2");
-        assertEquals("zhangfan2", userInfo1.getUsername());
+        boolean result = articleManager.saveArticle("标题1", "内容", null, userInfo1.getId());
+        assertEquals(true, result);
+        Article article = articleManager.findUniqueBy("title", "标题1");
+        assertEquals("内容", article.getBody());
+
 
     }
 

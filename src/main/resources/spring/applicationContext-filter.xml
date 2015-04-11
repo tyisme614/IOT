@@ -62,7 +62,7 @@
 	<bean id="restFilter" class="com.sensorhub.iot.core.servlet.ProxyFilter">
 		<property name="name" value="rest"/>
 		<property name="filter">
-			<bean class="com.casic.xxfw.core.ext.rest.RestFilter"/>
+			<bean class="com.sensorhub.iot.core.ext.rest.RestFilter"/>
 		</property>
 		<property name="urlPattern" value="/rs/*"/>
 	</bean>

@@ -14,7 +14,7 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "ARTICLE")
+@Table(name = "IOT_ARTICLE")
 @SequenceGenerator(name = "SEQ_ARTICLE_INFO_ID", sequenceName = "SEQ_ARTICLE_INFO_ID", allocationSize = 1, initialValue = 1)
 public class Article implements Serializable
 {
@@ -40,7 +40,7 @@ public class Article implements Serializable
 
     private Date pubDate; //发帖时间
 
-    private double fileSize;
+    private double fileSize=0;
 
     @Column(name="FILESIZE")
     public double getFileSize()
@@ -113,6 +113,7 @@ public class Article implements Serializable
     {
         this.status = status;
     }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     public UserInfo getUserInfo()
@@ -139,7 +140,6 @@ public class Article implements Serializable
     {
         return pubDate;
     }
-
     public void setPubDate(Date pubDate)
     {
         this.pubDate = pubDate;
